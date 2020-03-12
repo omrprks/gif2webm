@@ -1,6 +1,13 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
-IN_FILE=$1
-OUT_FILE=${IN_FILE/.gif/.webm}
+function error() {
+  echo "Error: $1" >&2
+  exit 1
+}
 
-ffmpeg -i $IN_FILE -c vp9 -b:v 0 -crf 41 $OUT_FILE
+[[ ! -x "$(command -v ffmpeg)" ]] && error "ffmpeg is required"
+[[ ! -f "$1" ]] && error "No such file"
+
+OUT_FILE=${1/.gif/.webm}
+
+ffmpeg -i $1 -c vp9 -b:v 0 -crf 41 $OUT_FILE
