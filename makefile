@@ -1,7 +1,20 @@
-all: install
+.PHONY: all
 
-prepare:
-	@mkdir -p ${HOME}/spells
+SRC=$(abspath gif2webm.sh)
+OUT=gif2webm
+DIST=/usr/local/bin/${OUT}
+SPELLS_DIR=${HOME}/spells
 
-install: prepare
-	ln -s $(abspath gif2webm.sh) ${HOME}/spells/gif2webm
+all:
+	@echo Nothing to see here
+
+link.prepare:
+	@mkdir -p ${SPELLS_DIR}
+
+link: link.prepare
+	@ln -s ${SRC} ${SPELLS_DIR}/${OUT}
+	@chmod +x ${SPELLS_DIR}/${OUT}
+
+install:
+	@cp ${SRC} ${DIST}
+	@chmod +x ${DIST}
