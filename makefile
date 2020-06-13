@@ -1,7 +1,8 @@
 .PHONY: all
 
-SRC=$(abspath gif2webm.sh)
-OUT=gif2webm
+SCRIPT=gif2webm.sh
+SRC=$(abspath ${SCRIPT})
+OUT=$(basename ${SCRIPT})
 DIST=/usr/local/bin/${OUT}
 SPELLS_DIR=${HOME}/spells
 
